@@ -1,0 +1,1 @@
+{"filename": "temp_data_path", "nDim": 130107, "nb": false, "n": 50, "minTf": 0, "lr": 0.0001, "nEpoch": 20, "subSamp": false, "nbA": 2, "nbB": 3, "vecPath": "temp_vectors.jsonl", "logPath": "temp_log.jsonl", "test": false, "Cs": [], "verbose": 0}
