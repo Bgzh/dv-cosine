@@ -1,11 +1,14 @@
 import numpy as np
 import os
+import sys
 
+seed = float(sys.argv[0])
+print(f"permutation cross-block with seed {seed}")
 
 with open('files_root/alldata-id_p3gram.txt', encoding='utf8') as f:
     dataset = f.readlines()
 
-np.random.seed(12)
+np.random.seed(seed)
 n = len(dataset)
 seq = np.arange(n)
 seq[:n//2] = np.random.permutation(n//2)

@@ -297,9 +297,16 @@ public class NeuralNetwork {
                 mag_h = sqrt(mag_h);
                 double cos_theta = h_dot_v / (mag_v * mag_h);
                 double y = 1.0 / (1 + exp(-a * cos_theta));
+                // for (int i = 0; i < n; i++) {
+                //     temp[i] += -(y - t) * a * (v[i] / (mag_v * mag_h) - h[i] * (h_dot_v) / (pow(mag_h, 3) * mag_v)) * lr;
+                //     v[i] += -(y - t) * a * (h[i] / (mag_v * mag_h) - v[i] * (h_dot_v) / (pow(mag_v, 3) * mag_h)) * lr;
+                // }
+                double A = -(y - t) * a / (mag_v * mag_h) * lr;
+                double B = -(y - t) * a * cos_theta / pow(mag_h, 2) * lr;
+                double C = -(y - t) * a * cos_theta / pow(mag_v, 2) * lr;
                 for (int i = 0; i < n; i++) {
-                    temp[i] += -(y - t) * a * (v[i] / (mag_v * mag_h) - h[i] * (h_dot_v) / (pow(mag_h, 3) * mag_v)) * lr;
-                    v[i] += -(y - t) * a * (h[i] / (mag_v * mag_h) - v[i] * (h_dot_v) / (pow(mag_v, 3) * mag_h)) * lr;
+                    temp[i] += v[i] * A - h[i] * B;
+                    v[i] += h[i] * A - v[i] * C;
                 }
             } else if (mode.equals("dotproduct") || mode.equals("l2rdotproduct")) {
                 double h_dot_v = 0;
