@@ -2,7 +2,7 @@ import numpy as np
 import os
 import sys
 
-seed = float(sys.argv[0])
+seed = int(sys.argv[1])
 print(f"permutation cross-block with seed {seed}")
 
 with open('files_root/alldata-id_p3gram.txt', encoding='utf8') as f:

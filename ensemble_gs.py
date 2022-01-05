@@ -303,8 +303,8 @@ if __name__=="__main__":
     warnings.simplefilter("ignore", category=ConvergenceWarning)
     np.random.seed(12)
     his = {}
-    rs = np.logspace(-4, 4, 9)
-    Cs = np.logspace(-4, 4, 9)
+    rs = np.logspace(-4, 4, 17)
+    Cs = np.logspace(-4, 4, 17)
     for dv_scaler_name, dv_scaler in dv_scalers.items():
         for bon_scaler_name, bon_scaler in bon_scalers.items():
             stclf = ImdbSentimentClf(r=rs, C=Cs, dv_scaler=dv_scaler, bon_scaler=bon_scaler)

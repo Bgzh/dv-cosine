@@ -12,19 +12,21 @@ if __name__=="__main__":
     seeds = [12, 22, 32]
     # in-block perm
     for i, seed in enumerate(seeds):
+        if i==0:
+            continue
         subprocess.run(["python", "permutation_training_test/perm_text_inblock.py", str(seed)])
-        subprocess.run(['java', '-cp', 'build/classes_src', 'dv.cosine.java.NeuralNetwork'])
+        subprocess.run(['java', '-cp', 'build/classes_src', '-Xmx24000m', 'dv.cosine.java.NeuralNetwork'])
         subprocess.run(["python", "permutation_training_test/restore_order.py"])
-        shutil.move(f"train_vectors_r.txt", "permutation_training_test/vectors/train_vectors_ib{i}.txt")
-        shutil.move(f"test_vectors_r.txt", "permutation_training_test/vectors/test_vectors_ib{i}.txt")
+        shutil.move("train_vectors_r.txt", f"permutation_training_test/vectors/train_vectors_ib{i}.txt")
+        shutil.move("test_vectors_r.txt", f"permutation_training_test/vectors/test_vectors_ib{i}.txt")
 
     # cross-block perm
     for i, seed in enumerate(seeds):
         subprocess.run(["python", "permutation_training_test/perm_text.py", str(seed)])
-        subprocess.run(['java', '-cp', 'build/classes_src', 'dv.cosine.java.NeuralNetwork'])
+        subprocess.run(['java', '-cp', 'build/classes_src', '-Xmx24000m', 'dv.cosine.java.NeuralNetwork'])
         subprocess.run(["python", "permutation_training_test/restore_order.py"])
-        shutil.move(f"train_vectors_r.txt", "permutation_training_test/vectors/train_vectors_cb{i}.txt")
-        shutil.move(f"test_vectors_r.txt", "permutation_training_test/vectors/test_vectors_cb{i}.txt")
+        shutil.move("train_vectors_r.txt", f"permutation_training_test/vectors/train_vectors_cb{i}.txt")
+        shutil.move("test_vectors_r.txt", f"permutation_training_test/vectors/test_vectors_cb{i}.txt")
     
     os.remove("alldata-id_p3gram.txt")
     os.remove("train_vectors.txt")
