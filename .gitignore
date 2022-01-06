@@ -3,3 +3,4 @@
 *.pt
 *.npy
 *.jpg
+!requirements.txt

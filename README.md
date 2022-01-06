@@ -62,9 +62,15 @@ to reproduce the experiments in this part. It will output "matched" if everythin
 
 ## Permutation before training (3.5 in the thesis)
 
-Whether or not to shuffle the dataset before embedding training might make a difference in the quality of the trained embeddings. So a couple of tests were run shuffling the dataset in-block or cross-block before training. Here only the code for shuffling and restoring the order of document vectors after training is provided, because it is difficult to streamline test with the original training script.
+Whether or not to shuffle the dataset before embedding training might make a difference in the quality of the trained embeddings. So a couple of tests were run shuffling the dataset in-block or cross-block before training.
 
-Run `permutation_training_test/perm_text_inblock.py` or `permutation_training_test/perm_text.py` to shuffle the 3gram file in-block or cross-block and store a shuffled copy in the main dir, ready to be used by the original training script in the folder src.
+Run
+
+    permutation_training_test/before_train_perm_test.py
+
+to do the shuffling and vector training. **The requires a working java installation**
+
+Then refer to permutation_training_test/vectors_comparison.ipynb for tests and results.
 
 After the training of each test, run `permutation_training_test/restore_order.py` to restore the order of the trained vectors in the main dir.
 
@@ -76,7 +82,7 @@ run
 
     python ensemble_gs.py
     
-
+to run the grid-search, and then refer to dv+bon_results.ipynb for results.
 
 ## Document Vectors using Cosine Similarity + RoBERTa: gridsearch
 
@@ -85,6 +91,8 @@ run
     python roberta/roberta.py
 
 to finetune the RoBERTa model and extract embeddings for the documents.
+
+Then check out dv+roberta.ipynb for additional experiments and results.
 
 
 
@@ -95,12 +103,14 @@ run
 
     python imdb_runs_experiments.py
 
-to run all experiments. **The requires a working java installation**.
+to run all experiments. **This requires a working java installation**.
 
 Use `imdb_runs_experiments_report.ipynb` to check out all the results and plots.
+
+Check out dvnb+roberta.ipynb for the ensemble of DV (with sub-sampling) and RoBERTa.
 
 # Dimensionality reduction
 This part includes experiments in the 5th section in the thesis.
 
-All the experiments and results are collected in `dr_test.ipynb`.
+All the experiments and results are collected in `dr_test.ipynb`. **This requires a working java installation**
 
